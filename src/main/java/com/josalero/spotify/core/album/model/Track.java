@@ -73,7 +73,6 @@ public class Track extends AuditEntity {
           cascade = {CascadeType.ALL},
           fetch = FetchType.EAGER)
   @ToString.Exclude
-  @JsonIgnore
   List<Image> images;
 
   public void addImage(Image image) {
