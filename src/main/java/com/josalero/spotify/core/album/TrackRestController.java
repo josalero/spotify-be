@@ -39,7 +39,7 @@ public class TrackRestController {
   @PreAuthorize("hasAnyRole('ADMIN')")
   public ResponseEntity<Track> getTracK(@RequestParam("isrc") String isrc) {
 
-    return ResponseEntity.ok(trackService.save(isrc));
+    return ResponseEntity.ok(trackService.retrieve(isrc));
   }
 
 }
