@@ -1,7 +1,7 @@
 package com.josalero.spotify.core.album;
 
 import com.josalero.spotify.core.album.model.Track;
-import com.josalero.spotify.core.album.service.AlbumService;
+import com.josalero.spotify.core.album.service.TrackService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.AccessLevel;
@@ -24,22 +24,22 @@ import org.springframework.web.bind.annotation.RestController;
 @Tags(value = {
     @Tag(name="Admin")
 })
-public class AlbumRestController {
+public class TrackRestController {
 
-  AlbumService albumService;
+  TrackService trackService;
 
   @PostMapping("/track")
   @PreAuthorize("hasAnyRole('ADMIN')")
   public ResponseEntity<Track> postTracK(@RequestParam("isrc") String isrc) {
 
-    return ResponseEntity.ok(albumService.save(isrc));
+    return ResponseEntity.ok(trackService.save(isrc));
   }
 
   @GetMapping("/track")
   @PreAuthorize("hasAnyRole('ADMIN')")
   public ResponseEntity<Track> getTracK(@RequestParam("isrc") String isrc) {
 
-    return ResponseEntity.ok(albumService.save(isrc));
+    return ResponseEntity.ok(trackService.save(isrc));
   }
 
 }

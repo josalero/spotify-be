@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.josalero.spotify.core.album.model.Track;
 import com.josalero.spotify.core.album.model.Image;
-import com.josalero.spotify.core.album.repository.AlbumRepository;
+import com.josalero.spotify.core.album.repository.TrackRepository;
 import com.josalero.spotify.core.exception.ResourceAlreadyExistException;
 import com.josalero.spotify.core.security.service.PrincipalService;
 import lombok.AccessLevel;
@@ -22,13 +22,13 @@ import java.util.Optional;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
 @Transactional
-public class AlbumService {
-  AlbumRepository albumRepository;
+public class TrackService {
+  TrackRepository trackRepository;
   SpotifyService spotifyService;
   PrincipalService principalService;
 
   public Track retrieve(String isrc) {
-    Optional<Track> track = albumRepository.findByIsrc(isrc);
+    Optional<Track> track = trackRepository.findByIsrc(isrc);
 
     if (track.isEmpty()) {
       throw new ResourceAlreadyExistException("Track not in our records");
@@ -39,7 +39,7 @@ public class AlbumService {
 
   public Track save(String isrc) {
 
-    Optional<Track> track = albumRepository.findByIsrc(isrc);
+    Optional<Track> track = trackRepository.findByIsrc(isrc);
 
     if (track.isPresent()) {
       throw new ResourceAlreadyExistException("Track already exist in our records");
@@ -75,6 +75,6 @@ public class AlbumService {
       trackToSave.addImage(image);
     }
 
-    return albumRepository.save(trackToSave);
+    return trackRepository.save(trackToSave);
   }
 }
