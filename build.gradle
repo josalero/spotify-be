@@ -1,0 +1,66 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.0'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.josalero'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.josalero.spotify.SpotifyTestApplication'
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'Gradle Quickstart',
+				'Implementation-Version': version,
+				'Main-Class': 'com.josalero.spotify.SpotifyTestApplication'
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.postgresql:postgresql:42.7.1'
+	implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+	implementation 'org.springframework:spring-webflux:6.2.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+	implementation 'io.hypersistence:hypersistence-utils-hibernate-62:3.8.2'
+	implementation 'io.projectreactor.netty:reactor-netty-http:1.2.0'
+	implementation 'dev.failsafe:failsafe:3.2.2'
+	runtimeOnly 'com.nimbusds:oauth2-oidc-sdk:11.20.1'
+
+
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
