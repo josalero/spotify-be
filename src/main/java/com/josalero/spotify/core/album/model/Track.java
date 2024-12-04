@@ -1,6 +1,5 @@
 package com.josalero.spotify.core.album.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.josalero.spotify.core.user.model.AuditEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -47,7 +46,7 @@ public class Track extends AuditEntity {
 
   @Column(name = "external_id", nullable = false, columnDefinition = "varchar(30)")
   @Size(max = 30, min = 1)
-  String externalId;
+  String albumId;
 
   @Column(name = "artist_name", nullable = false, columnDefinition = "varchar(50)")
   @Size(max = 50, min = 1)

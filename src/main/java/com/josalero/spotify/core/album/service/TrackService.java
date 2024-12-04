@@ -31,7 +31,7 @@ public class TrackService {
     Optional<Track> track = trackRepository.findByIsrc(isrc);
 
     if (track.isEmpty()) {
-      throw new ResourceAlreadyExistException("Track not in our records");
+      throw new ResourceAlreadyExistException("Track not found in our records");
     }
 
     return track.get();
@@ -49,7 +49,7 @@ public class TrackService {
 
     Track trackToSave = Track.builder()
             .artistName(response.get("artistName").asText())
-            .externalId(response.get("id").asText())
+            .albumId(response.get("albumId").asText())
             .name(response.get("name").asText())
             .explicitContentIndicator(response.get("explicitContentIndicator").asBoolean())
             .playbackSeconds(response.get("playbackSeconds").asInt() / 1000) //seconds

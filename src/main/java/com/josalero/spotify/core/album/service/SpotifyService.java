@@ -88,20 +88,20 @@ public class SpotifyService {
 
   private JsonNode getAlbumDetails(JsonNode response) {
     if (response == null || response.isEmpty()) {
-      throw new ResourceNotFoundException("isrc code not found");
+      throw new ResourceNotFoundException("ISRC code not found");
     }
 
     JsonNode jsonNode = response.get("tracks").get("items").get(0);
 
     if (jsonNode == null || jsonNode.isEmpty()){
-      throw new ResourceNotFoundException("isrc code not found");
+      throw new ResourceNotFoundException("ISRC code not found");
     }
 
     ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
     //Track name
     objectNode.put("name", jsonNode.get("name"));
     //Track id
-    objectNode.put("id", jsonNode.get("id"));
+    objectNode.put("albumId", jsonNode.get("album").get("id"));
     //Artist name
     objectNode.put("artistName", jsonNode.get("artists").get(0).get("name"));
     //Track name

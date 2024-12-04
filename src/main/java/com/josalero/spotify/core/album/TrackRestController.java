@@ -4,6 +4,7 @@ import com.josalero.spotify.core.album.model.Track;
 import com.josalero.spotify.core.album.service.TrackService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -30,7 +31,7 @@ public class TrackRestController {
 
   @PostMapping("/track")
   @PreAuthorize("hasAnyRole('ADMIN')")
-  public ResponseEntity<Track> postTracK(@RequestParam("isrc") String isrc) {
+  public ResponseEntity<Track> postTracK(@RequestParam("isrc") @NotNull String isrc) {
 
     return ResponseEntity.ok(trackService.save(isrc));
   }
